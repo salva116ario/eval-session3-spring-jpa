@@ -11,11 +11,13 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 
 @Entity
 @Table(name = "livre")
+
 public class Livre implements Serializable{
 
 	/**
@@ -23,7 +25,6 @@ public class Livre implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name = "li_id")
 	private Integer id;
 	@Column(name = "li_titre")
@@ -41,7 +42,7 @@ public class Livre implements Serializable{
 	@Column(name = "li_stock")
 	Integer stock;
 	@ManyToOne
-	@JsonManagedReference
+	
 	@JoinColumn(name = "categorie")
 	private Categorie categorie;
 	

@@ -1,12 +1,11 @@
 package co.simplo.evalsession3.repository;
 
 
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 import co.simplo.evalsession3.model.Livre;
 
-public interface LivreRepository extends CrudRepository<Livre, Integer>{
+public interface LivreRepository extends JpaRepository<Livre, Integer>{
 
 
 	Livre findById(int id);

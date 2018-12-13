@@ -114,22 +114,30 @@ function livre_submit(button, httpVerb, table) {
 	var livre = {};
 	// on récupère les valeurs saisies
 	livre["id"] = $("#id").val();
+	
 	livre["auteur"] = $("#auteur").val();
+	
 	livre["titre"] = $("#titre").val();
+	
 	livre["editeur"] = $("#editeur").val();
+	
 	livre["imageCouverture"] = $("#imageCouverture").val();
-	livre["sujet"] = $("#sujet").val();
-	livre["description"] = $("#description").val();
-	livre["anneeParution"] = $("#anneeParution").val();
+	
 	livre["isbn"] = $("#isbn").val();
-	livre["categorie"] = $("#categorie").val();
-	livre["langue"] = $("#langue").val();
-	livre["prixNeuf"] = $("#prixNeuf").val();
-	livre["prixOccasion"] = $("#prixOccasion").val();
-	livre["stock"] = $("#stock").val();
+	
+	var categorie = { "id" : $("#categorie").val(), "intitule" : ""};
+	
+	livre["categorie"]= categorie;
 
+	
+	
+	livre["prix"] = $("#prix").val();
+	
+	livre["stock"] = $("#stock").val();
+	
+	
 	// on initialise l'url du back
-	var url = "/livre/id/";
+	var url = "/addLivre/";
 
 	// si c'est une modification, on passe l'identifiant
 	if (httpVerb == "PUT")
@@ -140,15 +148,14 @@ function livre_submit(button, httpVerb, table) {
 
 	// on lance la méthode ajax pour faire le lien avec les méthodes back du
 	// constructeur
-	$
-			.ajax({
+	$.ajax({
 				type : httpVerb, // méthode POST ou PUT
-				contentType : "application/json", // type de données
+				contentType : "application/json; charset=utf-8", // type de données
 				url : url, // url destinatrice
+				dataType : 'json', // on précise le mode de transfert
 				data : JSON.stringify(livre), // on transforme les données de
 												// la variable Javascript
 												// "livre" en format JSON
-				dataType : 'json', // on précise le mode de transfert
 				cache : false, // pas de cache sollicité
 				timeout : 600000, // délai d'attente
 				success : function(data) { // si ok
@@ -232,14 +239,12 @@ function getLivre() {
 						$("#auteur").val(data.auteur);
 						$("#editeur").val(data.editeur);
 						$("#imageCouverture").val(data.imageCouverture);
-						$("#sujet").val(data.sujet);
-						$("#description").val(data.description);
-						$("#anneeParution").val(data.anneeParution);
+						
 						$("#isbn").val(data.isbn);
 						$("#categorie").val(data.categorie);
-						$("#langue").val(data.langue);
-						$("#prixNeuf").val(data.prixNeuf);
-						$("#prixOccasion").val(data.prixOccasion);
+					
+						$("#prix").val(data.prix);
+						
 						$("#stock").val(data.stock);
 						loadDatatable(path);
 						console.log("SUCCESS : ", data);
@@ -270,7 +275,7 @@ function deleteLivre() {
 	$.ajax({
 		type : "DELETE",
 		contentType : "application/json",
-		url : "/livre/id/" + idLivre,
+		url : "/deleteLivre/" + idLivre,
 		// data : {},
 		// dataType : 'json',
 		cache : false,

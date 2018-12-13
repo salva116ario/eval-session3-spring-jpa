@@ -1,7 +1,8 @@
 package co.simplo.evalsession3.model;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,39 +13,50 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
 @Table(name = "categorie")
-public class Categorie {
+
+public class Categorie implements Serializable{
 	
+	
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name = "ca_id")
-	private Integer id;
+	private String id;
 	
 	@Column(name = "ca_intitule")
 	private String intitule;
 	
+	
 	@JsonBackReference
 	@OneToMany(mappedBy = "categorie" )
-	private Set<Livre> livres = new HashSet<Livre>();
+	private List<Livre> livres = new ArrayList<Livre>();
 
 	public Categorie() {
 		super();
 	}
 
-	public Categorie(Integer id, String intitule, Set<Livre> livres) {
+	public Categorie(String id, String intitule, List<Livre> livres) {
 		super();
 		this.id = id;
 		this.intitule = intitule;
 		this.livres = livres;
 	}
 
-	public Integer getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 
@@ -56,11 +68,11 @@ public class Categorie {
 		this.intitule = intitule;
 	}
 
-	public Set<Livre> getLivres() {
+	public List<Livre> getLivres() {
 		return livres;
 	}
 
-	public void getLivres(Set<Livre> livres) {
+	public void getLivres(List<Livre> livres) {
 		this.livres = livres;
 	}
 	
