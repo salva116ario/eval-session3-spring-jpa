@@ -6,7 +6,7 @@
 Il s'agit d'une interface graphique permettant de manipuler les données d'une table de BDD contenant des livres.
 L'idée est de pouvoir consulter et éditer ce catalogue en réalisant toutes les opération de CRUD.
 
-### MLD
+### MLD
 ![mld](/mld.png)
 La BDD est très simple ! Une table *livre* contenant les infos de chaque ouvrage, liée à une table *categorie*, partant du principe qu'un livre ne peut avoir qu'une seule catégorie.
 
