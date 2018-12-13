@@ -25,8 +25,10 @@
 	height: 2em;
 }
 .edition {
-	color: blue;
-	font-size: 1.1em;
+	color: #0080c0;
+	font-size: 2em;
+	text-align: center;
+	margin: 30px 0;
 }
 table {
 	font-size: 0.8em;
@@ -38,8 +40,48 @@ table {
 	
 }
 form {
-	background-color: lightyellow;
+	background-color: transparent;
 	font-size: 0.8em;
 	text-align: left;
-	border: 1px solid black;
+	border: 0;
+	padding: 20px 0 20px 0;
+}
+
+.box {
+	border: 1px solid #c0c0c0;
+}
+
+.grey {
+	background-color: #eeeeee;
+}
+.white {
+	box-shadow: 2px 2px 4px rgba(0,0,0,0.35);
+}
+.CTA {
+	text-align: center;
+	margin: 10px 0 20px 0;
+}
+
+
+h3 {
+	color: black;
+	border-bottom: 1px solid black;
+	margin: 0 15px 0 15px !important;
+	padding: 15px 0 10px 0;
+}
+.drop-list-box {
+	margin: 15px 0 0px 8.33333333% !important;
+}
+.list-group {
+	max-height: 100px;
+    overflow-y: scroll;
+}
+.list-group-item {
+	padding: 5px 15px!important;
+}
+#livreTable {
+	padding: 40px 0;
+}
+#livreDetail {
+	margin-bottom: 20px;
 }
