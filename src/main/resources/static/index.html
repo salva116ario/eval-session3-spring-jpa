@@ -27,94 +27,103 @@
 		<header>
 			<div class="edition">Mode administrateur : édition du catalogue</div>
 		</header>
-	
+
 		<article id="livreDetail">
-			
-			<div>			
+
+			<div>
 				<div class="box grey">
 					<h3>Modifier l'article</h3>
-				
+
 					<form class="form-group-sm" id="livre-form">
 						<fieldset>
-		
+
 							<div class="form-row">
-							
+
 								<div class="form-group col-sm-4">
-									<label class="control-label">Titre</label>
-									<input type="text" tabindex="2" class="form-control" id="titre" />							
+									<label class="control-label">Titre</label> <input type="text"
+										tabindex="2" class="form-control" id="titre" />
 								</div>
-								
+
 								<div class="form-group col-sm-3">
-									<label class="control-label">Catégorie</label>
-									<input type="text" tabindex="10" class="form-control" id="categorie" />
-									
+									<label class="control-label">Catégorie</label> <select
+										class="form-control" id="categorie">
+										<option value="">Catégorie</option>
+									</select>
 								</div>
-								
+
 								<div class="form-group col-sm-2">
-									<label for="prixOccasion">Prix Occasion</label>
-									<input type="number" tabindex="13" class="form-control" id="prixOccasion" />
+									<label for="prixOccasion">Prix Occasion</label> <input
+										type="number" tabindex="13" class="form-control" id="prix" />
 								</div>
-								
+
 								<div class="form-group col-sm-2">
-									<label for="stock">Stock</label>
-									<input type="number" tabindex="14" class="form-control" id="stock" />
+									<label for="stock">Stock</label> <input type="number"
+										tabindex="14" class="form-control" id="stock" />
 								</div>
-								
+
 								<div class="form-group col-sm-1">
-									<label for="id">id</label>
-									<input type="number" tabindex="1" placeholder="identifiant" title="identifiant"	class="form-control" id="id" />
+									<label for="id">id</label> <input type="number" tabindex="1"
+										placeholder="identifiant" title="identifiant"
+										class="form-control" id="id" />
 								</div>
-								
+
 								<div class="form-group col-sm-2">
-									<label class="control-label">Auteur</label>
-									<input type="text" tabindex="3" class="form-control" id="auteur" />							
+									<label class="control-label">Auteur</label> <input type="text"
+										tabindex="3" class="form-control" id="auteur" />
 								</div>
-								
+
 								<div class="form-group col-sm-2">
-									<label class="control-label">Editeur</label>
-									<input type="text" tabindex="4" class="form-control" id="editeur" />
+									<label class="control-label">Editeur</label> <input type="text"
+										tabindex="4" class="form-control" id="editeur" />
 								</div>
-								
+
 								<div class="form-group col-sm-5">
-									<label class="control-label">URL couv.</label>
-									<input type="text" tabindex="5" class="form-control" id="imageCouverture" />
+									<label class="control-label">URL couv.</label> <input
+										type="text" tabindex="5" class="form-control"
+										id="imageCouverture" />
 								</div>
-								
+
 								<div class="form-group col-sm-3">
-									<label for="isbn">ISBN</label>
-									<input type="number" tabindex="9" class="form-control" id="isbn" />
-								</div>						
-		
-								
-								
+									<label for="isbn">ISBN</label> <input type="number"
+										tabindex="9" class="form-control" id="isbn" />
+								</div>
+
+								<div class="form-group col-sm-12">
+									<select class="form-control" id="choixGet">
+										<option value="">RECHERCHER PAR :</option>
+										<option value="byId">ID</option>
+										<option value="byTitre">TITRE</option>
+										<option value="byAuteur">AUTEUR</option>
+										<option value="byIsbn">ISBN</option>
+										<option value="byCategorie">CATEGORIE</option>
+										<option value="byStock">STOCK MINIMUM</option>
+									</select>
+								</div>
+
 							</div>
-							
+
 						</fieldset>
 					</form>
-					
+
 					<p class="CTA">
-						<select class="btn">
-						  <option value="volvo">Recherche par catégorie</option>
-						  <option value="saab">Arts</option>
-						  <option value="mercedes">Bande dessinée</option>
-						  <option value="audi">Cuisine, gastronomie, vins</option>
-						  <option value="saab">Dictionnaires, méthodes de langue</option>
-						  <option value="mercedes">Comptabilité, économie, droit</option>
-						  <option value="audi">Littérature</option>
-						</select>
-						<button id="btn-get" class="btn btn-primary btn-sm"	title="Rechercher">GET</button>
-						<button id="btn-post" class="btn btn-primary btn-sm" title="Ajouter">POST</button>
-						<button id="btn-put" class="btn btn-primary btn-sm"	title="Modifier">PUT</button>
-						<button id="btn-delete" class="btn btn-primary btn-sm" title="Supprimer">DELETE</button>
-						<button id="btn-reset" class="btn btn-primary btn-sm" title="Effacer">RESET</button>
+						<button id="btn-get" class="btn btn-primary btn-sm"
+							title="Rechercher">GET</button>
+						<button id="btn-post" class="btn btn-primary btn-sm"
+							title="Ajouter">POST</button>
+						<button id="btn-put" class="btn btn-primary btn-sm"
+							title="Modifier">PUT</button>
+						<button id="btn-delete" class="btn btn-primary btn-sm"
+							title="Supprimer">DELETE</button>
+						<button id="btn-reset" class="btn btn-primary btn-sm"
+							title="Effacer">RESET</button>
 					</p>
-				
-				</div>				
+
+				</div>
 			</div>
 			<hr>
-		<hr>
+			<hr>
 			<div id="feedbackLivre"></div>
-		
+
 		</article>
 
 
@@ -151,7 +160,7 @@
 		</article>
 	</section>
 	<footer id="footer" class="container">
-		<div id="imageCouverture"></div>
+
 		<p>
 			© <a href="http://www.simplon.co">simplon.co</a> 2018
 		</p>
