@@ -91,3 +91,6 @@ h3 {
 .dropdown-menu {
 	z-index: 10;
 }
+#btn-reset {
+	background-color: coral;
+}

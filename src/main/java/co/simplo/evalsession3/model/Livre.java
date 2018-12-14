@@ -4,6 +4,8 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -19,6 +21,7 @@ public class Livre implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "li_id")
 	private Integer id;
 	@Column(name = "li_titre")
@@ -43,7 +46,7 @@ public class Livre implements Serializable {
 		super();
 	}
 
-	public Livre(Integer id, String titre, String auteur, String editeur, Long isbn, String couverture, Double prix,
+	public Livre(Integer id,String titre, String auteur, String editeur, Long isbn, String couverture, Double prix,
 			Integer stock, Categorie categorie) {
 		super();
 		this.id = id;
@@ -57,6 +60,10 @@ public class Livre implements Serializable {
 		this.categorie = categorie;
 	}
 
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
 	public Categorie getCategorie() {
 		return this.categorie;
 	}
@@ -65,9 +72,7 @@ public class Livre implements Serializable {
 		return id;
 	}
 
-	public void setId(int id) {
-		this.id = id;
-	}
+
 
 	public String getTitre() {
 		return titre;
