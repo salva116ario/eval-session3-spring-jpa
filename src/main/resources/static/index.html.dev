@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>LIVROKAZ - CONSOLE ADMINISTRATEUR - GESTION DU CATALOGUE</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="stylesheet" href="css/main.css" />
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+	integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+	crossorigin="anonymous" />
+<link rel="stylesheet" type="text/css"
+	href="https://cdn.datatables.net/v/dt/dt-1.10.13/datatables.min.css" />
+</head>
+
+<body>
+
+	<header id="header">
+		<div class="inner">
+			<a href="index.html" class="logo"> <span class="symbol"><img
+					src="image/logo-simplon.png" alt="Logo Simplon.co" /></span><span
+				class="title">Livrokaz. Des Livres tout nazes.</span>
+			</a>
+		</div>
+	</header>
+
+	<section id="sectionLivre" class="container" style="min-height: 300px">
+
+		<header>
+			<div class="edition">Mode administrateur : édition du catalogue</div>
+		</header>
+
+		<article id="livreDetail">
+
+			<form class="form-group-sm" id="livre-form">
+				<fieldset>
+
+					<div class="form-row">
+
+						<div class="form-group col-sm-2">
+							<label for="id">id</label> <input type="number" tabindex="1"
+								placeholder="identifiant" title="identifiant"
+								class="form-control" id="id" />
+						</div>
+
+						<div class="form-group col-sm-2">
+							<label for="isbn">ISBN</label> <input type="number" tabindex="9"
+								class="form-control" id="isbn" />
+						</div>
+
+						<div class="form-group col-sm-2">
+							<label for="prixOccasion">Prix</label> <input type="number"
+								tabindex="13" class="form-control" id="prix" />
+						</div>
+
+						<div class="form-group col-sm-2">
+							<label for="stock">Stock</label> <input type="number"
+								tabindex="14" class="form-control" id="stock" />
+						</div>
+
+
+						<div class="form-group col-sm-12">
+							<label class="col-sm-2 control-label">Titre</label> <input
+								type="text" tabindex="2" class="form-control" id="titre" />
+
+						</div>
+
+						<div class="form-group col-sm-12">
+							<label class="col-sm-2 control-label">Auteur</label> <input
+								type="text" tabindex="3" class="form-control" id="auteur" />
+
+						</div>
+						<div class="form-group col-sm-12">
+							<label class="col-sm-2 control-label">Editeur</label> <input
+								type="text" tabindex="4" class="form-control" id="editeur" />
+
+						</div>
+						<div class="form-group col-sm-12">
+							<label class="col-sm-2 control-label">URL couv.</label> <input
+								type="text" tabindex="5" class="form-control"
+								id="imageCouverture" />
+
+						</div>
+
+						<div class="form-group col-sm-12">
+							<!-- 	<label class="col-sm-2 control-label">Catégorie</label> -->
+							<select class="form-control" id="categorie">
+								<option value="">Catégorie</option>
+							</select>
+						</div>
+						<div class="form-group col-sm-12">
+							<select class="form-control" id="choixGet">
+								<option value="">RECHERCHER PAR :</option>
+								<option value="byId">ID</option>
+								<option value="byTitre">TITRE</option>
+								<option value="byAuteur">AUTEUR</option>
+								<option value="byIsbn">ISBN</option>
+								<option value="byCategorie">CATEGORIE</option>
+								<option value="byStock">STOCK MINIMUM</option>
+							</select>
+						</div>
+					</div>
+				</fieldset>
+			</form>
+			<hr>
+			<div class="form-group boutons">
+				<div class="col-sm-12">
+					<button id="btn-get" class="btn btn-primary btn-sm"
+						title="Rechercher">GET</button>
+					<button id="btn-post" class="btn btn-primary btn-sm"
+						title="Ajouter">POST</button>
+					<button id="btn-put" class="btn btn-primary btn-sm"
+						title="Modifier">PUT</button>
+					<button id="btn-delete" class="btn btn-primary btn-sm"
+						title="Supprimer">DELETE</button>
+					<button id="btn-reset" class="btn btn-primary btn-sm"
+						title="Effacer">RESET</button>
+				</div>
+			</div>
+			<hr>
+			<div id="feedbackLivre"></div>
+
+		</article>
+
+
+
+		<article id="livreList">
+			<table id="livreTable" class="display">
+				<thead>
+					<tr>
+						<th>id</th>
+						<th>titre</th>
+						<th>auteur</th>
+						<th>éditeur</th>
+						<th>couverture</th>
+						<th>isbn</th>
+						<th>catégorie</th>
+						<th>prix de vente</th>
+						<th>stock</th>
+					</tr>
+				</thead>
+				<tfoot>
+					<tr>
+						<th>id</th>
+						<th>titre</th>
+						<th>auteur</th>
+						<th>éditeur</th>
+						<th>couverture</th>
+						<th>isbn</th>
+						<th>catégorie</th>
+						<th>prix de vente</th>
+						<th>stock</th>
+					</tr>
+				</tfoot>
+			</table>
+
+
+		</article>
+	</section>
+	<footer id="footer" class="container">
+		<div id="imageCouverture"></div>
+		<p>
+			© <a href="http://www.simplon.co">simplon.co</a> 2018
+		</p>
+	</footer>
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js"
+		integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+		crossorigin="anonymous"></script>
+	<script type="text/javascript"
+		src="https://cdn.datatables.net/v/dt/dt-1.10.13/datatables.min.js"></script>
+	<script type="text/javascript" src="js/script.js"></script>
+</body>
+
+</html>
