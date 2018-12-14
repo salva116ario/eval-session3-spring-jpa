@@ -1,0 +1,93 @@
+#header .logo {
+	display: block;
+	border-bottom: 0;
+	color: inherit;
+	font-weight: 900;
+	letter-spacing: 0.35em;
+	margin: 1em 0 1em 0;
+	text-decoration: none;
+	text-transform: uppercase;
+	display: inline-block;
+}
+
+#header .logo>* {
+	display: inline-block;
+	vertical-align: middle;
+}
+
+#header .logo .symbol {
+	margin-right: 0.65em;
+}
+
+#header .logo .symbol img {
+	display: block;
+	width: 3em;
+	height: 2em;
+}
+.edition {
+	color: #0080c0;
+	font-size: 2em;
+	text-align: center;
+	margin: 30px 0;
+}
+table {
+	font-size: 0.8em;
+	
+}
+.boutons button {
+	height: 25px;
+	margin-right: 10px;
+	
+}
+form {
+	background-color: transparent;
+	font-size: 0.8em;
+	text-align: left;
+	border: 0;
+	padding: 20px 0 20px 0;
+}
+
+.box {
+	border: 1px solid #c0c0c0;
+}
+
+.grey {
+	background-color: #eeeeee;
+}
+.white {
+	box-shadow: 2px 2px 4px rgba(0,0,0,0.35);
+}
+.CTA {
+	text-align: center;
+	margin: 10px 0 20px 0;
+}
+
+
+h3 {
+	color: black;
+	border-bottom: 1px solid black;
+	margin: 0 15px 0 15px !important;
+	padding: 15px 0 10px 0;
+}
+#json {
+	border-bottom: none;
+}
+.drop-list-box {
+	margin: 15px 0 0px 8.33333333% !important;
+}
+.list-group {
+	max-height: 100px;
+    overflow-y: scroll;
+}
+.list-group-item {
+	padding: 5px 15px!important;
+}
+#livreTable {
+	padding: 40px 0;
+}
+#livreDetail {
+	margin-bottom: 20px;
+}
+.dropdown-menu {
+	z-index: 10;
+}
