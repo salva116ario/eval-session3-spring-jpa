@@ -37,6 +37,9 @@ table {
 	margin-right: 10px;
 	
 }
+select {
+	background-color: white;
+}
 form {
 	background-color: lightyellow;
 	font-size: 0.8em;

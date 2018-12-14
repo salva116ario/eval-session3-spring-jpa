@@ -4,31 +4,25 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-
-
+/**
+ * Bean Livre
+ *
+ */
 @Entity
 @Table(name = "livre")
+public class Livre implements Serializable {
 
-public class Livre implements Serializable{
-
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	@Id
 	@Column(name = "li_id")
 	private Integer id;
 	@Column(name = "li_titre")
-	private String titre;	
+	private String titre;
 	@Column(name = "li_auteur")
 	private String auteur;
 	@Column(name = "li_editeur")
@@ -42,13 +36,9 @@ public class Livre implements Serializable{
 	@Column(name = "li_stock")
 	Integer stock;
 	@ManyToOne
-	
 	@JoinColumn(name = "categorie")
 	private Categorie categorie;
-	
-	
-	
-	
+
 	public Livre() {
 		super();
 	}
@@ -67,7 +57,6 @@ public class Livre implements Serializable{
 		this.categorie = categorie;
 	}
 
-	
 	public Categorie getCategorie() {
 		return this.categorie;
 	}
@@ -146,10 +135,5 @@ public class Livre implements Serializable{
 				+ ", couverture=" + couverture + ", prix=" + prix + ", stock=" + stock + ", categorie=" + categorie
 				+ "]";
 	}
-	
-	
 
-	
-	
-	
 }

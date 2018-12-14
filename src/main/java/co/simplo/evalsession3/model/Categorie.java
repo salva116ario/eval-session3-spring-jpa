@@ -13,32 +13,27 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
+/**
+ * Bean Categorie
+ *
+ */
 @Entity
 @Table(name = "categorie")
+public class Categorie implements Serializable {
 
-public class Categorie implements Serializable{
-	
-	
-	
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "ca_id")
 	private String id;
-	
+
 	@Column(name = "ca_intitule")
 	private String intitule;
-	
-	
+
 	@JsonBackReference
-	@OneToMany(mappedBy = "categorie" )
+	@OneToMany(mappedBy = "categorie")
 	private List<Livre> livres = new ArrayList<Livre>();
 
 	public Categorie() {
@@ -75,8 +70,6 @@ public class Categorie implements Serializable{
 	public void getLivres(List<Livre> livres) {
 		this.livres = livres;
 	}
-	
-	
-	
+
 
 }

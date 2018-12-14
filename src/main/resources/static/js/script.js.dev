@@ -1,11 +1,11 @@
 $(document).ready(function() {
 
-	// appelle la méthode pour charger la base données dans la datatable
-	
+	// appelle la méthode pour charger la table livre dans la datatable
 	loadDatatable();
-
 	// déclaration d'une variable table;
 	var table = $('#livreTable').DataTable();
+	// appelle la méthode pour charger la table categorie
+	loadCategories();
 
 	/*
 	 * Si vous double-cliquez sur une ligne de la datatable vous récupérez la
@@ -18,11 +18,11 @@ $(document).ready(function() {
 		$("#titre").val(dataRow.titre);
 		$("#auteur").val(dataRow.auteur);
 		$("#editeur").val(dataRow.editeur);
-		$("#imageCouverture").val(dataRow.couverture); 
+		$("#imageCouverture").val(dataRow.couverture);
 		$("#isbn").val(dataRow.isbn);
-		$("#categorie").val(dataRow.categorie.intitule);
+		$("#categorie").val(dataRow.categorie.id);
 		$("#langue").val(dataRow.langue);
-		$("#prixNeuf").val(dataRow.prix);
+		$("#prix").val(dataRow.prix);
 		$("#stock").val(dataRow.stock);
 	});
 
@@ -32,7 +32,6 @@ $(document).ready(function() {
 	// et la type de méthode, ici POST.
 	$("#btn-post").click(function() {
 		livre_submit($("#btn-post"), "POST", table);
-
 	});
 
 	// si vous cliquez sur le bouton click "btn-put"
@@ -47,7 +46,7 @@ $(document).ready(function() {
 	// click on RESET
 	$("#btn-reset").click(function() {
 		resetForm(); // méthode qui met les valeurs des zones de textes du
-						// formulaire à blanc
+		// formulaire à blanc
 		resetFeedBackLivre();
 	});
 
@@ -63,16 +62,12 @@ $(document).ready(function() {
 	});
 });
 
-/**
- * Charge les données dans la DataTable (JQuery)
- * 
- * @returns
- */
+// charge les données dans la datatable
 function loadDatatable() {
 	$('#livreTable').DataTable({
-		
+
 		"ajax" : {
-			url : "/getAll",
+			url : '/getAll',
 			dataSrc : ''
 		},
 		"columns" : [ {
@@ -88,7 +83,7 @@ function loadDatatable() {
 			"render" : function(data, type, row, meta) {
 				return '<img src="' + data + '" width="50px" />';
 			}
-		},{
+		}, {
 			"data" : "isbn"
 		}, {
 			"data" : "categorie.intitule"
@@ -100,42 +95,27 @@ function loadDatatable() {
 
 		]
 	});
-
 }
-/**
- * Méthode qui traite les POST et PUT
- * 
- * @param button
- * @param httpVerb
- * @returns
- */
+
+// Fonction qui traite les PUT et PUST
 function livre_submit(button, httpVerb, table) {
 
 	var livre = {};
 	// on récupère les valeurs saisies
 	livre["id"] = $("#id").val();
-	
 	livre["auteur"] = $("#auteur").val();
-	
 	livre["titre"] = $("#titre").val();
-	
 	livre["editeur"] = $("#editeur").val();
-	
-	livre["imageCouverture"] = $("#imageCouverture").val();
-	
+	livre["couverture"] = $("#imageCouverture").val();
 	livre["isbn"] = $("#isbn").val();
-	
-	var categorie = { "id" : $("#categorie").val(), "intitule" : ""};
-	
-	livre["categorie"]= categorie;
-
-	
-	
+	var categorie = {
+		"id" : $("#categorie").val(),
+		"intitule" : ""
+	};
+	livre["categorie"] = categorie;
 	livre["prix"] = $("#prix").val();
-	
 	livre["stock"] = $("#stock").val();
-	
-	
+
 	// on initialise l'url du back
 	var url = "/addLivre/";
 
@@ -148,14 +128,15 @@ function livre_submit(button, httpVerb, table) {
 
 	// on lance la méthode ajax pour faire le lien avec les méthodes back du
 	// constructeur
-	$.ajax({
+	$
+			.ajax({
 				type : httpVerb, // méthode POST ou PUT
 				contentType : "application/json; charset=utf-8", // type de données
 				url : url, // url destinatrice
 				dataType : 'json', // on précise le mode de transfert
 				data : JSON.stringify(livre), // on transforme les données de
-												// la variable Javascript
-												// "livre" en format JSON
+				// la variable Javascript
+				// "livre" en format JSON
 				cache : false, // pas de cache sollicité
 				timeout : 600000, // délai d'attente
 				success : function(data) { // si ok
@@ -164,9 +145,9 @@ function livre_submit(button, httpVerb, table) {
 							+ JSON.stringify(data, null, 4) + "</pre>";
 
 					$('#feedbackLivre').html(json); // renvoie les infos aux
-													// format JSON adapté au
-													// HTML dans la balise "<DIV
-													// id="feedbacklivre">
+					// format JSON adapté au
+					// HTML dans la balise "<DIV
+					// id="feedbacklivre">
 
 					console.log("SUCCESS : ", data);
 					button.prop("disabled", false);
@@ -186,41 +167,93 @@ function livre_submit(button, httpVerb, table) {
 				}
 			});
 
-	table.reload(); // on recharge les données via ajax et la méthode reload()
 }
-
+// vide les champs du formulaire
 function resetForm() {
 	$('#livre-form')[0].reset();
 }
-
+// vide la div feedbackLivre
 function resetFeedBackLivre() {
 	$('#feedbackLivre').html("");
 }
 
-/**
- * Méthode qui récupère un livre
- * 
- * @returns
- */
-function getLivre() {
+// Récupère les infos de la table catégorie
+function loadCategories() {
+	$.ajax({
+		type : "GET",
+		contentType : "application/json",
+		url : '/categories',
+		data : {},
+		dataType : 'json',
+		cache : false,
+		timeout : 600000,
+		success : function(data) {
 
-	var idValue = $("#id").val();
-	console.log(idValue);
-	var isbnValue = $("#isbn").val();
-	console.log(isbnValue);
-	var path;
-	
+			var json = JSON.stringify(data, null, 4);
+			var list = '';
+			$.each(data, function(key, value) {
+				list += '<option value=' + value['id'] + '>'
+						+ value['intitule'] + '</option>';
+			});
+			$("#categorie").append(list);
+		},
+		error : function(e) {
 
-	if (idValue.length == 0 && isbnValue.length == 0) {
-		$('#feedbackLivre').html("Merci d'indiquer au moins un id ou un isbn");
-	} else {
-		if (idValue.length > 0) {
-			path = "/byId/" + idValue;
-			console.log(path);
-		} else {
-			path = "/byIsbn/" + isbnValue;
-			console.log(path);
+			var json = "<h3>Server Response</h3><pre>" + e.responseText
+					+ "</pre>";
+
+			$('#feedbackLivre').html(json);
+
+			console.log("ERROR : ", e);
 		}
+	});
+}
+
+// Methode qui retourne les infos d'un livre
+function getLivre() {
+	
+	var path;
+	var choixRecherche = $("#choixGet").val();
+	switch (choixRecherche) {
+	case "byId" :
+		path = "/byId/" + $("#id").val();
+		break;
+	case "byTitre" :
+		path = "byTitre/" + $("#titre").val();
+		break;
+	case "byAuteur" :
+		path = "byAuteur/" + $("#auteur").val();
+		break;
+	case "byIsbn" :
+		path = "byIsbn/" + $("#isbn").val();
+		break;
+	case "byStock" :
+		path = "byStock/" + $("#stock").val();
+		break;
+	case "byCategorie" :
+		path = "byCategorie/" + $("#categorie").val();
+		console.log(path);
+		break;
+	default :
+			$('#feedbackLivre').html(
+			"Recherche impossible");
+	}
+	
+//	
+//	var idValue = $("#id").val();
+//	var titreValue = $("#titre").val();
+//	var path;
+//	if (idValue.length == 0 && titreValue.length == 0) {
+//		$('#feedbackLivre').html(
+//				"Merci d'indiquer au moins un id ou une partie du titre");
+//	} else {
+//		if (idValue.length > 0) {
+//			path = "/byId/" + idValue;
+//			console.log(path);
+//		} else {
+//			path = "/byTitre/" + titreValue;
+//			console.log(path);
+//		}
 		$.ajax({
 					type : "GET",
 					contentType : "application/json",
@@ -233,21 +266,24 @@ function getLivre() {
 
 						var json = "<h3>Server Response format JSON</h3><pre>Livre trouvé :<br>"
 								+ JSON.stringify(data, null, 4) + "</pre>";
+
 						$('#feedbackLivre').html(json);
+
 						$("#id").val(data.id);
 						$("#titre").val(data.titre);
 						$("#auteur").val(data.auteur);
 						$("#editeur").val(data.editeur);
-						$("#imageCouverture").val(data.imageCouverture);
-						
+						$("#imageCouverture").val(data.couverture);
 						$("#isbn").val(data.isbn);
-						$("#categorie").val(data.categorie);
-					
+						$("#categorie").val(data.categorie.id);
 						$("#prix").val(data.prix);
-						
 						$("#stock").val(data.stock);
-						loadDatatable(path);
-						console.log("SUCCESS : ", data);
+
+						console.log("SUCCESS : ");
+						
+					
+						
+
 					},
 					error : function(e) {
 
@@ -255,19 +291,14 @@ function getLivre() {
 								+ e.responseText + "</pre>";
 
 						$('#feedbackLivre').html(json);
+					
 
 						console.log("ERROR : ", e);
 					}
 				});
-	}
-	
 }
 
-/**
- * méthode pour supprimer un livre
- * 
- * @returns
- */
+// Méthode pour supprimer un livre
 function deleteLivre() {
 
 	var idLivre = $("#id").val();
@@ -295,7 +326,12 @@ function deleteLivre() {
 
 			$('#feedbackLivre').html(json);
 			console.log("ERROR : ", e);
+		},
+		complete : function() {
+			document.location.reload();
 		}
 	});
-	table.reload();
-}
+	
+	
+	
+	}
