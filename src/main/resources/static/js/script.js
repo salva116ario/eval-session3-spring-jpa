@@ -224,14 +224,14 @@ function getLivre() {
 					timeout : 600000,
 					success : function(data) {
 
-						var json = "<h3>Server Response format JSON</h3><pre>Livre trouvé :<br>"
+						var json = "<h3 id='json'>Server Response format JSON</h3><pre>Livre trouvé :<br>"
 								+ JSON.stringify(data, null, 4) + "</pre>";
 						$('#feedbackLivre').html(json);
 						$("#id").val(data.id);
 						$("#titre").val(data.titre);
 						$("#auteur").val(data.auteur);
 						$("#editeur").val(data.editeur);
-						$("#imageCouverture").val(data.imageCouverture);
+						$("#imageCouverture").val(data.couverture);
 						$("#sujet").val(data.sujet);
 						$("#description").val(data.description);
 						$("#anneeParution").val(data.anneeParution);
@@ -239,7 +239,7 @@ function getLivre() {
 						$("#categorie").val(data.categorie);
 						$("#langue").val(data.langue);
 						$("#prixNeuf").val(data.prixNeuf);
-						$("#prixOccasion").val(data.prixOccasion);
+						$("#prixOccasion").val(data.prix);
 						$("#stock").val(data.stock);
 						loadDatatable(path);
 						console.log("SUCCESS : ", data);
@@ -283,6 +283,7 @@ function deleteLivre() {
 			console.log("SUCCESS : ", data);
 
 			resetForm();
+			
 		},
 		error : function(e) {
 			var json = "<h3>Server Response</h3><pre>" + e.responseText
@@ -292,5 +293,5 @@ function deleteLivre() {
 			console.log("ERROR : ", e);
 		}
 	});
-	table.reload();
+//	table.reload();
 }

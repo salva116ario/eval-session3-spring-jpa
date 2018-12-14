@@ -69,6 +69,9 @@ h3 {
 	margin: 0 15px 0 15px !important;
 	padding: 15px 0 10px 0;
 }
+#json {
+	border-bottom: none;
+}
 .drop-list-box {
 	margin: 15px 0 0px 8.33333333% !important;
 }
@@ -84,4 +87,7 @@ h3 {
 }
 #livreDetail {
 	margin-bottom: 20px;
+}
+.dropdown-menu {
+	z-index: 10;
 }

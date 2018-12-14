@@ -68,7 +68,7 @@ public class Livre implements Serializable{
 
 	
 	public Categorie getCategorie() {
-		return this.categorie;
+		return categorie;
 	}
 
 	public Integer getId() {
